@@ -1,5 +1,5 @@
 import cx from 'classnames';
-import * as React from 'react';
+import * as React from 'react'
 
 export const Header: React.FunctionComponent<HeaderProps> = ({
   rank,
