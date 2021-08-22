@@ -21,26 +21,25 @@ export const Header: React.FunctionComponent<HeaderProps> = ({
 
 export interface HeaderProps {
   /** https://html.spec.whatwg.org/multipage/sections.html#rank */
-  rank: Rank;
+  rank: HeaderRank;
   /**
    * The heading's rank and styling are independent. If no style level is
    * specified, the component will be styled at its rank.
    */
-  styleLevel?: StyleLevel;
+  styleLevel?: HeaderStyleLevel;
   anchor?: boolean;
 }
 
-export type Rank = '1' | '2' | '3' | '4' | '5' | '6';
-
+export type HeaderRank = '1' | '2' | '3' | '4' | '5' | '6';
 export type HeadingLevel = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
-export type StyleLevel =
+export type HeaderStyleLevel =
   | HeadingLevel
   | 'display-1'
   | 'display-2'
   | 'display-3'
   | 'display-4';
 
-const rankMap: Record<Rank, HeadingLevel> = {
+const rankMap: Record<HeaderRank, HeadingLevel> = {
   1: 'h1',
   2: 'h2',
   3: 'h3',
@@ -49,7 +48,7 @@ const rankMap: Record<Rank, HeadingLevel> = {
   6: 'h6',
 };
 
-const styleMap: Record<StyleLevel, string> = {
+const styleMap: Record<HeaderStyleLevel, string> = {
   'display-1': 'text-8xl mb-8 font-extralight',
   'display-2': 'text-8xl mb-8 font-extralight',
   'display-3': 'text-8xl mb-8 font-extralight',
@@ -62,8 +61,12 @@ const styleMap: Record<StyleLevel, string> = {
   h6: 'text-base mb-1',
 };
 
-export function createAnchor(str: string): string {
-  const seed = unescape(encodeURIComponent(str.toLocaleLowerCase()));
+export function createAnchor(str: string): string | undefined {
+  const seed = unescape(encodeURIComponent(str.toLocaleLowerCase().trim()));
+
+  if (seed === '') {
+    return undefined;
+  }
 
   const anchor =
     typeof process !== undefined

@@ -1,8 +1,8 @@
-# Static Site Generator
+# Prismic × Next.js — SSG
 
-This project is a static site generator for a book. One of the goals of this
-project is longevity and durability. The dynamic nature of most websites lend
-themselves to security issues that require constant updating. By producing a
+This project is a static site generator for a book. Chief goals of this project
+are longevity and durability. The dynamic nature of most websites lend
+themselves to security issues that require constant updating; by producing a
 static site, we not only create a highly
 [portable](https://en.wikipedia.org/wiki/Software_portability) format but also
 one that requires minimal maintenance and cost.

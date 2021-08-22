@@ -2,7 +2,7 @@ import * as t from 'io-ts';
 import { Elements } from 'prismic-reactjs';
 import React from 'react';
 import { SliceProps } from './types';
-import { Header, Rank } from 'components/typography/Header';
+import { Header, HeaderRank } from 'components/typography/Header';
 import { Headings, titleBlock } from 'prismic/types';
 import { useLogger } from 'src/hooks/logger';
 import { type } from 'types/utils';
@@ -14,7 +14,7 @@ export const Heading: React.FunctionComponent<SliceProps<HeadingSlice>> = ({
   const heading = slice.primary.heading_content[0];
 
   if (!heading) {
-    logger.warn('Heading missing content');
+    logger.warn('`heading_content` missing content');
     return null;
   }
 
@@ -35,7 +35,7 @@ export const headingSlice = type({
   }),
 });
 
-const rankMap: Record<Headings, Rank> = {
+const rankMap: Record<Headings, HeaderRank> = {
   [Elements.heading1]: '1',
   [Elements.heading2]: '2',
   [Elements.heading3]: '3',

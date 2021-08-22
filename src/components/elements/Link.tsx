@@ -4,9 +4,14 @@ import * as React from 'react';
 import { routeDefinitions, RouteParamsMap } from 'prismic/router';
 import { useLogger } from 'src/hooks/logger';
 
-export const Link: React.FunctionComponent<
-  LinkProps & { query?: string; hash?: string }
-> = ({ name, basic, children, query, hash, ...params }) => {
+export const Link: React.FunctionComponent<LinkProps> = ({
+  name,
+  basic,
+  children,
+  query,
+  hash,
+  ...params
+}) => {
   const logger = useLogger();
 
   const route = routeDefinitions[name];
@@ -38,9 +43,12 @@ export const Link: React.FunctionComponent<
 export type LinkProps = {
   [Name in keyof RouteParamsMap]: {
     name: Name;
-    basic?: boolean;
   } & RouteParamsMap[Name] &
-    Pick<NextLinkProps, 'prefetch'>;
+    Pick<NextLinkProps, 'prefetch'> & {
+      query?: string;
+      hash?: string;
+      basic?: boolean;
+    };
 }[keyof RouteParamsMap];
 
 export const defaultLinkClassNames = 'underline hover:text-blue-600';

@@ -2,6 +2,7 @@ import NextLink from 'next/link';
 import { Elements, HTMLSerializer } from 'prismic-reactjs';
 import React from 'react';
 import { defaultLinkClassNames } from 'components/elements/Link';
+import { Ol } from 'components/typography/Ol';
 
 export const htmlSerializer: HTMLSerializer<React.ReactNode> = function (
   kind,
@@ -31,15 +32,11 @@ export const htmlSerializer: HTMLSerializer<React.ReactNode> = function (
       );
 
     case Elements.oList:
-      return (
-        <ol className="list-decimal" key={key}>
-          {children}
-        </ol>
-      );
+      return <Ol key={key}>{children}</Ol>;
 
     case Elements.list:
       return (
-        <ul className="list-disc" key={key}>
+        <ul className="list-disc list-inside sm:list-outside" key={key}>
           {children}
         </ul>
       );
