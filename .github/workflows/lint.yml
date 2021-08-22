@@ -1,9 +1,15 @@
 name: Lint
 
-on: pull_request
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
-  eslint:
+  lint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -13,6 +19,6 @@ jobs:
           node-version: 16
       - name: yarn install
         run: yarn install --production=false
-      - name: eslint
-        uses: icrawl/action-eslint@v1
+      - name: lint
+        run: yarn run lint
 
