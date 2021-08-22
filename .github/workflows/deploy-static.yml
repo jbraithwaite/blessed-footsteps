@@ -18,6 +18,7 @@ jobs:
           yarn install --production=false
           yarn run build
           touch out/.nojekyll
+          mv out/404/index.html out/404.html && rm -r out/404
         env:
           ACCESS_TOKEN: ${{ secrets.PRISMIC_ACCESS_TOKEN }}
           REPO_NAME: ${{ secrets.PRISMIC_REPO_NAME }}

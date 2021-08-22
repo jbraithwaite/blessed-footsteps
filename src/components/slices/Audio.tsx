@@ -3,16 +3,23 @@ import { RichText } from 'prismic-reactjs';
 import React from 'react';
 import { SliceProps } from './types';
 import { label, richTextBlock, titleBlock } from 'prismic/types';
+import { useLogger } from 'src/hooks/logger';
 import { type } from 'types/utils';
 
 export const Audio: React.FunctionComponent<SliceProps<AudioSlice>> = ({
   slice,
 }) => {
-  const title = slice.primary.audio_title[0]?.text;
+  const logger = useLogger();
+  const title = slice.primary.audio_title[0];
+
+  if (!title) {
+    logger.warn('`audio_title` missing content');
+    return null;
+  }
 
   return (
     <figure className="bg-gray-50 rounded-lg px-10 py-7 my-5">
-      <figcaption className="font-bold mb-5">{title}</figcaption>
+      <figcaption className="font-bold mb-5">{title.text}</figcaption>
       <audio controls src={slice.primary.audio_clip.url} className="mb-5">
         Your browser does not support the
         <code>audio</code> element.

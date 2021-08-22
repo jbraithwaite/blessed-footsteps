@@ -8,6 +8,7 @@ import React from 'react';
 import { Link } from 'components/elements';
 import { Container } from 'components/layout';
 import { createAnchor, Header } from 'components/typography/Header';
+import { Ol } from 'components/typography/Ol';
 import { graphql } from 'prismic/client';
 import { optional } from 'types/utils';
 
@@ -21,7 +22,7 @@ const TableOfContents: React.FunctionComponent<TableOfContentsProps> = ({
           <a>Contents</a>
         </Link>
       </Header>
-      <ol className="list-decimal">
+      <Ol>
         {allChapters.edges.map((chapter, i) => {
           const sections = chapter.node.body.filter(
             (p): p is t.TypeOf<typeof section> =>
@@ -69,7 +70,7 @@ const TableOfContents: React.FunctionComponent<TableOfContentsProps> = ({
             </li>
           );
         })}
-      </ol>
+      </Ol>
     </Container>
   );
 };

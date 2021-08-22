@@ -1,10 +1,30 @@
-import { defined } from 'src/utils';
+import { useRouter as useNextRouter } from 'next/router';
+import { defined, noop } from 'src/utils';
 
 export interface RouteDefinition<T extends {}> {
   href: (params: T) => string;
   /** Paths are used by the Prismic client for routing */
   path?: string;
 }
+
+export function useRouter(): { push: (args: PushArgs) => void } {
+  const nextRouter = useNextRouter();
+
+  return {
+    push: ({ name, ...params }) => {
+      const route = routeDefinitions[name];
+      const href = route.href(params as any);
+
+      nextRouter.push(href).catch(noop);
+    },
+  };
+}
+
+type PushArgs = {
+  [Name in keyof RouteParamsMap]: {
+    name: Name;
+  } & RouteParamsMap[Name];
+}[keyof RouteParamsMap];
 
 /**
  * Mapping of pages to their path (for Prismic) and href (for Next)
