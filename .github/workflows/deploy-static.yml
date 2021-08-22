@@ -16,6 +16,7 @@ jobs:
         run: |
           yarn install --production=false
           yarn run build
+          touch out/.nojekyll
         env:
           ACCESS_TOKEN: ${{ secrets.PRISMIC_ACCESS_TOKEN }}
           REPO_NAME: ${{ secrets.PRISMIC_REPO_NAME }}
