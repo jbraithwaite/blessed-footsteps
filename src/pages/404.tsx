@@ -23,13 +23,7 @@ export const Custom404: React.FunctionComponent<Custom404Props> = () => {
   // https://tailwindcomponents.com/component/mac-terminal
 
   return (
-    <div
-      className="min-h-screen flex items-center bg-gradient-to-br from-purple-400 via-pink-500 to-red-500"
-      style={{
-        backgroundSize: 'cover',
-        backgroundRepeat: 'no-repeat',
-      }}
-    >
+    <div className="min-h-screen flex items-center bg-gradient-to-br from-purple-400 via-pink-500 to-red-500">
       <div className="w-11/12 sm:w-1/2 sm:max-w-lg mx-auto">
         <div className="w-full shadow-2xl subpixel-antialiased rounded h-64 bg-black border-black mx-auto">
           <div
