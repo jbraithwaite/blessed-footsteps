@@ -56,6 +56,7 @@ const TableOfContents: React.FunctionComponent<TableOfContentsProps> = ({
                     basic
                     hash={hash}
                     key={key}
+                    prefetch={false}
                   >
                     <a className={className}>{heading.text}</a>
                   </Link>

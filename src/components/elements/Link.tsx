@@ -1,5 +1,5 @@
 import cx from 'classnames';
-import NextLink from 'next/link';
+import NextLink, { LinkProps as NextLinkProps } from 'next/link';
 import * as React from 'react';
 import { routeDefinitions, RouteParamsMap } from 'prismic/router';
 import { useLogger } from 'src/hooks/logger';
@@ -39,7 +39,8 @@ export type LinkProps = {
   [Name in keyof RouteParamsMap]: {
     name: Name;
     basic?: boolean;
-  } & RouteParamsMap[Name];
+  } & RouteParamsMap[Name] &
+    Pick<NextLinkProps, 'prefetch'>;
 }[keyof RouteParamsMap];
 
 export const defaultLinkClassNames = 'underline hover:text-blue-600';
