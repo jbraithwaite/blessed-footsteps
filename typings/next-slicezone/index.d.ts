@@ -16,7 +16,7 @@ declare module 'next-slicezone/hooks' {
       params: Record<string, string>;
       previewData: unknown;
       preview: unknown;
-    }) => Record<string, string>;
+    }) => Record<string, string | undefined>;
     /** Pass a Prismic client here */
     client: ReturnType<typeof Prismic.client>;
     /** Key of slices array in API response (`doc.data[slicesKey]`) */
@@ -40,7 +40,7 @@ declare module 'next-slicezone/hooks' {
       params: Record<string, string>;
       previewData: unknown;
       preview: unknown;
-    }) => Record<string, string>;
+    }) => Record<string, string | undefined>;
     /** Pass a Prismic client here */
     client: ReturnType<typeof Prismic.client>;
     /**

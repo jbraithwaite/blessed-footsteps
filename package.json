@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build && yarn run export",
+    "build": "next build && yarn export",
     "export": "next export",
     "start": "next start",
     "lint": "next lint"
@@ -28,7 +28,8 @@
     "tslib": "^2.3.1"
   },
   "devDependencies": {
-    "@types/react": "17.0.18",
+    "@babel/core": "^7.15.0",
+    "@types/react": "17.0.19",
     "@typescript-eslint/eslint-plugin": "^4.29.2",
     "@typescript-eslint/parser": "^4.29.2",
     "autoprefixer": "^10.3.1",

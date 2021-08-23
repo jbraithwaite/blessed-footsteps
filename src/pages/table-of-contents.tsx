@@ -10,11 +10,14 @@ import { Container } from 'components/layout';
 import { createAnchor, Header } from 'components/typography/Header';
 import { Ol } from 'components/typography/Ol';
 import { graphql } from 'prismic/client';
+import { useLogger } from 'src/hooks/logger';
 import { optional } from 'types/utils';
 
 const TableOfContents: React.FunctionComponent<TableOfContentsProps> = ({
   allChapters,
 }) => {
+  const logger = useLogger();
+
   return (
     <Container>
       <Header rank="1">
@@ -30,23 +33,33 @@ const TableOfContents: React.FunctionComponent<TableOfContentsProps> = ({
           );
 
           const chapterUid = chapter.node._meta.uid;
+          const title = chapter.node.chapter_title[0];
+
+          if (!title) {
+            logger.warn('`chapter_title` missing content');
+            return null;
+          }
 
           return (
             <li key={i}>
               <strong>
                 {chapterUid ? (
                   <Link name="chapter" chapterUid={chapterUid} basic>
-                    <a className="hover:underline">
-                      {chapter.node.chapter_title[0].text}
-                    </a>
+                    <a className="hover:underline">{title.text}</a>
                   </Link>
                 ) : (
-                  chapter.node.chapter_title[0].text
+                  title.text
                 )}
               </strong>
 
               {sections.map(({ primary }, key) => {
                 const heading = primary.heading_content[0];
+
+                if (!heading) {
+                  logger.warn('`heading_content` missing content');
+                  return null;
+                }
+
                 const hash = createAnchor(heading.text);
                 const className = styleMap[heading.type];
 
