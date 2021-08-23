@@ -92,6 +92,7 @@ export const headings = t.keyof({
   [Elements.heading6]: null,
 });
 
+export type TitleBlock = t.TypeOf<typeof titleBlock>;
 export const titleBlock = t.array(
   type({
     type: headings,

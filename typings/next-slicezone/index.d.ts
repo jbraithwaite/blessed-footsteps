@@ -30,7 +30,7 @@ declare module 'next-slicezone/hooks' {
     queryType?: 'repeat' | 'single';
     /** Object passed to return object of `getStatcProps` */
     getStaticPropsParams?: Record<string, string | number | boolean>;
-  }): GetStaticProps;
+  }): GetStaticProps<P>;
 
   export function useGetStaticPaths(params: {
     /** Custom type to be queried */
