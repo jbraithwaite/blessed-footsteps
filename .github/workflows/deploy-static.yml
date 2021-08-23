@@ -27,12 +27,13 @@ jobs:
           ACCESS_TOKEN: ${{ secrets.PRISMIC_ACCESS_TOKEN }}
           REPO_NAME: ${{ secrets.PRISMIC_REPO_NAME }}
 
+      # Next.js relies on a `_next` folder
+      # https://github.blog/2009-12-29-bypassing-jekyll-on-github-pages/
+      # GitHub Pages relies on /404.html
       - name: Support GitHub Pages
-        # Next.js relies on a `_next` folder
-        # https://github.blog/2009-12-29-bypassing-jekyll-on-github-pages/
-        run: touch out/.nojekyll
-        # GitHub Pages relies on /404.html
-        run: mv out/404/index.html out/404.html && rm -r out/404
+        run: |
+          touch out/.nojekyll
+          mv out/404/index.html out/404.html && rm -r out/404
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@4.1.4
