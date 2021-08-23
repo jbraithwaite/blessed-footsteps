@@ -70,7 +70,7 @@ export const linkResolver = (doc: Doc): string => {
   const route = routes.find(({ type }) => doc.type === type);
 
   if (route?.path) {
-    return route.path;
+    return route.path.replace(':uid', doc.uid);
   }
 
   // Fallback
