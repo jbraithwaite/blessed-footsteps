@@ -17,7 +17,8 @@
   "rules": {
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "@typescript-eslint/no-empty-interface": "off",
-    "@typescript-eslint/no-namespace": "off",
+    "@typescript-eslint/no-namespace": "error",
+    "@typescript-eslint/no-implicit-any-catch": "error",
     "@typescript-eslint/no-unused-vars": "off",
     "@typescript-eslint/prefer-regexp-exec": "off",
     "@typescript-eslint/require-await": "off",
