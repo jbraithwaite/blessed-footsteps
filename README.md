@@ -33,10 +33,6 @@ result.
 
 Duplicate this `.env.local.sample`, rename it `.env.local` and fill it in.
 
--   `REPO_NAME` - Prismic repository name
--   `ACCESS_TOKEN` - Prismic access token
-    (`https://<REPO_NAME>.prismic.io/settings/apps/`)
-
 ## Deploying static site
 
 The github workflow `deplay-static.yml` will create a build of the App (fetching

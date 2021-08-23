@@ -1,4 +1,5 @@
 import { useRouter as useNextRouter } from 'next/router';
+import { Doc } from './types';
 import { defined, noop } from 'src/utils';
 
 export interface RouteDefinition<T extends {}> {
@@ -7,7 +8,12 @@ export interface RouteDefinition<T extends {}> {
   path?: string;
 }
 
-export function useRouter(): { push: (args: PushArgs) => void } {
+interface Router {
+  push(args: PushArgs): void;
+  isPreview: boolean;
+}
+
+export function useRouter(): Router {
   const nextRouter = useNextRouter();
 
   return {
@@ -17,6 +23,7 @@ export function useRouter(): { push: (args: PushArgs) => void } {
 
       nextRouter.push(href).catch(noop);
     },
+    isPreview: nextRouter.isPreview,
   };
 }
 
@@ -58,6 +65,17 @@ export const routes: Route[] = Object.keys(routeDefinitions)
     return path ? { type, path } : undefined;
   })
   .filter(defined);
+
+export const linkResolver = (doc: Doc): string => {
+  const route = routes.find(({ type }) => doc.type === type);
+
+  if (route?.path) {
+    return route.path;
+  }
+
+  // Fallback
+  return `/${doc.uid}`;
+};
 
 export interface Route {
   type: string;

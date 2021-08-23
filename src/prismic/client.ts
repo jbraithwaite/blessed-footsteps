@@ -5,19 +5,20 @@ import { DefaultClient } from '@prismicio/client/types/client';
 import { PrismicLink } from 'apollo-link-prismic';
 import { routes } from './router';
 
-const accessToken = process.env.ACCESS_TOKEN;
-const REPO_NAME = process.env.REPO_NAME;
+const accessToken = process.env.PRISMIC_API_TOKEN;
 
 if (!accessToken) {
-  throw new Error('Environment variable `ACCESS_TOKEN` not set');
+  throw new Error('Environment variable `PRISMIC_API_TOKEN` not set');
 }
 
-if (!REPO_NAME) {
-  throw new Error('Environment variable `REPO_NAME` not set');
+if (!process.env.PRISMIC_REPOSITORY_NAME) {
+  throw new Error('Environment variable `PRISMIC_REPOSITORY_NAME` not set');
 }
 
-const API_ENDPOINT = `https://${REPO_NAME}.cdn.prismic.io/api/v2`;
-const GRAPHQL_ENDPOINT = `http://${REPO_NAME}.prismic.io/graphql`;
+export const PRISMIC_REPOSITORY_NAME = process.env.PRISMIC_REPOSITORY_NAME;
+
+const API_ENDPOINT = `https://${PRISMIC_REPOSITORY_NAME}.cdn.prismic.io/api/v2`;
+const GRAPHQL_ENDPOINT = `http://${PRISMIC_REPOSITORY_NAME}.prismic.io/graphql`;
 
 export const graphql = new ApolloClient({
   link: PrismicLink({
