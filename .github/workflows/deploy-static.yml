@@ -24,8 +24,8 @@ jobs:
       - name: Build
         run: yarn build
         env:
-          ACCESS_TOKEN: ${{ secrets.PRISMIC_ACCESS_TOKEN }}
-          REPO_NAME: ${{ secrets.PRISMIC_REPO_NAME }}
+          PRISMIC_API_TOKEN: ${{ secrets.PRISMIC_ACCESS_TOKEN }}
+          PRISMIC_REPOSITORY_NAME: ${{ secrets.PRISMIC_REPO_NAME }}
 
       # Next.js relies on a `_next` folder
       # https://github.blog/2009-12-29-bypassing-jekyll-on-github-pages/
