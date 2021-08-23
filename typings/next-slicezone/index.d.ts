@@ -15,8 +15,8 @@ declare module 'next-slicezone/hooks' {
     apiParams?: (options: {
       params: Record<string, string>;
       previewData: unknown;
-      preview: unknown;
-    }) => Record<string, string | undefined>;
+      preview: boolean;
+    }) => Record<string, string | boolean | undefined>;
     /** Pass a Prismic client here */
     client: ReturnType<typeof Prismic.client>;
     /** Key of slices array in API response (`doc.data[slicesKey]`) */
