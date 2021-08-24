@@ -7,10 +7,14 @@ import React from 'react';
 import { Link } from 'components/elements';
 import { Container } from 'components/layout';
 import { Slices } from 'components/slices/Slices';
+import { UnknownSlice } from 'components/slices/types';
 import { Header } from 'components/typography/Header';
 import { client } from 'prismic/client';
+import { usePreview } from 'prismic/hooks';
+import { TitleBlock } from 'prismic/types';
 
-const ChapterPage: React.FunctionComponent = (props: any) => {
+const ChapterPage: React.FunctionComponent<ChapterPageProps> = (props) => {
+  usePreview(props.id, props.previewData?.ref);
   const title = props.data.chapter_title[0]?.text;
 
   return (
@@ -29,16 +33,17 @@ const ChapterPage: React.FunctionComponent = (props: any) => {
   );
 };
 
-export const getStaticProps: GetStaticProps = SliceStaticProps({
-  client: client(),
-  queryType: 'repeat',
-  type: 'chapter',
-  apiParams: ({ params }) => {
-    return {
-      uid: params.uid,
-    };
-  },
-});
+export const getStaticProps: GetStaticProps<ChapterPageProps> =
+  SliceStaticProps({
+    client: client(),
+    queryType: 'repeat',
+    type: 'chapter',
+    apiParams: ({ params }) => {
+      return {
+        uid: params.uid,
+      };
+    },
+  });
 
 export const getStaticPaths: GetStaticPaths = SliceStaticPaths({
   client: client(),
@@ -58,3 +63,17 @@ export const getStaticPaths: GetStaticPaths = SliceStaticPaths({
 });
 
 export default ChapterPage;
+
+export interface ChapterPageProps {
+  data: {
+    body: UnknownSlice[];
+    chapter_title: TitleBlock;
+  };
+  preview: boolean | null;
+  previewData: { ref?: string };
+  type: string;
+  id: string;
+  uid: string;
+  url: string;
+  linked_documents: unknown[];
+}

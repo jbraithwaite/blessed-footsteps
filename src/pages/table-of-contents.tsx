@@ -124,7 +124,7 @@ export const getStaticProps: GetStaticProps<TableOfContentsProps> =
       } else {
         return { props: validation.right };
       }
-    } catch (e) {
+    } catch (_e: unknown) {
       return { notFound: true };
     }
   };
