@@ -22,7 +22,7 @@ export function usePreview(documentId: string, activeRef: string | undefined) {
 
     if (ref.value && ref.value !== activeRef) {
       router
-        .push(`/api/preview?token=${ref}&documentId=${documentId}`)
+        .push(`/api/preview?token=${ref.value}&documentId=${documentId}`)
         .catch(noop);
       return;
     }
