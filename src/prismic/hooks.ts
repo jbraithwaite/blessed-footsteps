@@ -2,7 +2,7 @@ import { either } from 'fp-ts';
 import { constUndefined, flow } from 'fp-ts/lib/function';
 import { useRouter } from 'next/router';
 import React from 'react';
-import { noop } from 'src/utils';
+import { useLogger } from 'src/hooks/logger';
 import { failable } from 'types/failable';
 import { JsonParse } from 'types/json';
 
@@ -16,14 +16,16 @@ export function usePreview(documentId: string, activeRef: string | undefined) {
     }
 
     if (ref.state === 'failure') {
-      router.push('/api/exit-preview').catch(noop);
+      const path = '/api/exit-preview';
+      window.location.href = path;
       return;
     }
 
-    if (ref.value && ref.value !== activeRef) {
-      router
-        .push(`/api/preview?token=${ref.value}&documentId=${documentId}`)
-        .catch(noop);
+    if (ref.value !== activeRef) {
+      const path = `/api/preview?token=${ref.value}&documentId=${documentId}`;
+      // Using a window redirect seems to cause less issues with Next.js
+      // Was getting a 404 on the API not exisiting
+      window.location.href = path;
       return;
     }
   }, [activeRef, documentId, ref, router]);
@@ -38,8 +40,9 @@ function getCookie(name: string): string | undefined {
   return parts.length === 2 ? parts.pop()?.split(';').shift() : undefined;
 }
 
-function useRefFromCookie(): failable.Failable<string | undefined> {
-  const [ref, setRef] = React.useState<failable.Failable<string | undefined>>(
+function useRefFromCookie(): failable.Failable<string> {
+  const logger = useLogger();
+  const [ref, setRef] = React.useState<failable.Failable<string>>(
     failable.pending(),
   );
 
@@ -50,36 +53,52 @@ function useRefFromCookie(): failable.Failable<string | undefined> {
   React.useEffect(() => {
     const cookieValue = getCookie(cookieKey);
 
-    if (!cookieValue || !repositoryName) {
-      return setRef(failable.failure(new Error('Missing Cookie or repo name')));
+    if (!cookieValue) {
+      return setRef(failable.failure(new Error('Missing cookie')));
     }
 
-    setRef(failable.success(getRef(keyName)(cookieValue)));
-  }, [keyName, repositoryName]);
+    if (!repositoryName) {
+      logger.error(
+        'Missing environment variable `PRISMIC_REPOSITORY_NAME` on the client',
+      );
+      return setRef(failable.failure(new Error('Missing repository name')));
+    }
+
+    const reference = getRef(keyName)(cookieValue);
+
+    if (reference) {
+      setRef(failable.success(reference));
+    } else {
+      logger.error('Could not find the information in the cookie', {
+        extra: { keyName, cookieValue },
+      });
+      setRef(failable.failure(new Error('Issue finding the cookie value')));
+    }
+  }, [logger, keyName, repositoryName]);
 
   return ref;
 }
 
-const getRef = (keyName: string) =>
+const getRef = (keyName: string): ((str: string) => string | undefined) =>
   flow(
-    decodeURI,
+    decodeURIComponent,
     JsonParse,
-    either.fold(constUndefined, (d) => {
+    either.fold(constUndefined, (a) => {
       if (
-        typeof d === 'object' &&
-        d !== null &&
-        !Array.isArray(d) &&
-        keyName in d
+        typeof a === 'object' &&
+        a !== null &&
+        !Array.isArray(a) &&
+        keyName in a
       ) {
-        const f = d[keyName];
+        const b = a[keyName];
         if (
-          typeof f === 'object' &&
-          f !== null &&
-          !Array.isArray(f) &&
-          'preview' in f &&
-          typeof f.preview === 'string'
+          typeof b === 'object' &&
+          b !== null &&
+          !Array.isArray(b) &&
+          'preview' in b &&
+          typeof b.preview === 'string'
         ) {
-          return f.preview;
+          return b.preview;
         }
       }
 
