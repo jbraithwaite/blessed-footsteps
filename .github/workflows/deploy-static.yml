@@ -21,14 +21,13 @@ jobs:
       - name: Install
         run: yarn install --production=false
 
-      - name: Build
-        run: yarn build
+      - name: Build & Export
+        run: |
+          yarn build
+          yarn export
         env:
           PRISMIC_API_TOKEN: ${{ secrets.PRISMIC_ACCESS_TOKEN }}
           PRISMIC_REPOSITORY_NAME: ${{ secrets.PRISMIC_REPO_NAME }}
-
-      - name: Export
-        run: yarn export
 
       # Next.js relies on a `_next` folder
       # https://github.blog/2009-12-29-bypassing-jekyll-on-github-pages/
