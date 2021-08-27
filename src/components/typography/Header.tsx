@@ -1,5 +1,6 @@
 import cx from 'classnames';
 import * as React from 'react';
+import { noop } from 'src/utils';
 
 export const Header: React.FunctionComponent<HeaderProps> = ({
   rank,
@@ -7,14 +8,27 @@ export const Header: React.FunctionComponent<HeaderProps> = ({
   anchor,
   children,
 }) => {
-  const component = rankMap[rank];
-
   const id =
     anchor && typeof children === 'string' ? createAnchor(children) : undefined;
 
+  const handleClick = React.useCallback(() => {
+    if (id) {
+      const url = new URL(window.location.href);
+      url.hash = id;
+      window.history.replaceState({}, window.document.title, url.toString());
+      navigator.clipboard.writeText(url.toString()).catch(noop);
+    }
+  }, [id]);
+
+  const component = rankMap[rank];
+
   return React.createElement(
     component,
-    { className: cx(styleMap[styleLevel ?? component], 'mt-5'), id },
+    {
+      className: cx(styleMap[styleLevel ?? component], 'mt-5'),
+      id,
+      onClick: handleClick,
+    },
     [children],
   );
 };

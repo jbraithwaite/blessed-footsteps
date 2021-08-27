@@ -11,6 +11,7 @@ export const Heading: React.FunctionComponent<SliceProps<HeadingSlice>> = ({
   slice,
 }) => {
   const logger = useLogger();
+
   const heading = slice.primary.heading_content[0];
 
   if (!heading) {
