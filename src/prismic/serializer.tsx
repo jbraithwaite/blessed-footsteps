@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import NextLink from 'next/link';
 import { Elements, HTMLSerializer } from 'prismic-reactjs';
 import React from 'react';
@@ -34,7 +33,8 @@ export const htmlSerializer: HTMLSerializer<React.ReactNode> = function (
 
     case Elements.image:
       return (
-        <Image
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
           src={element.url}
           alt={element.url}
           width={element.dimensions.width}
