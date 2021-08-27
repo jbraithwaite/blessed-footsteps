@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.app-page > * {
+  @apply max-w-full sm:max-w-2xl sm:mx-auto px-5;
+}
+
+.app-page .app-hero {
+  @apply w-screen h-screen max-w-full -mb-40 relative z-[-1] bg-cover bg-center;
+}
