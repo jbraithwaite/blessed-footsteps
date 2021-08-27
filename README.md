@@ -63,11 +63,11 @@ Setup a trigger on [Pipedream](https://pipedream.com/) to
     -   Locations (Venues)
     -   Citations
 
+-   Image caching (imgix?)
 -   Improve GitHub actions (Cache yaml install)
 -   Figure out displaying citations on chapter pages
 -   Make graphql queries generate types
 -   Convert snake case of queries to lower camel
 -   Upstream: improve types (e.g. `ApiOptions`)
 -   [Darkmode](https://tailwindcss.com/docs/dark-mode)
--   Deploy to Varcel for quick previews
 -   Make search work when dynamic, do something else when static, maybe algolia?

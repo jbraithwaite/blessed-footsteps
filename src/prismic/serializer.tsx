@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import NextLink from 'next/link';
 import { Elements, HTMLSerializer } from 'prismic-reactjs';
 import React from 'react';
@@ -31,6 +32,16 @@ export const htmlSerializer: HTMLSerializer<React.ReactNode> = function (
         </p>
       );
 
+    case Elements.image:
+      return (
+        <Image
+          src={element.url}
+          alt={element.url}
+          width={element.dimensions.width}
+          height={element.dimensions.height}
+          key={key}
+        />
+      );
     case Elements.oList:
       return <Ol key={key}>{children}</Ol>;
 

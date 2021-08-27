@@ -1,3 +1,4 @@
 import { Container } from './Container';
+import { Page } from './Page';
 
-export { Container };
+export { Container, Page };

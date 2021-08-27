@@ -10,7 +10,7 @@ export const Quote: React.FunctionComponent<SliceProps<QuoteSlice>> = ({
   slice,
 }) => {
   return (
-    <blockquote className="sm:-mx-24 font-serif text-lg leading-loose border-l-8 pl-5 sm:pl-10 py-5 my-5">
+    <blockquote className="font-serif text-lg leading-loose border-l-8 pl-5 sm:pl-10 py-5 my-5 sm:max-w-3xl">
       <RichText
         render={slice.primary.quote_content}
         htmlSerializer={htmlSerializer}
@@ -26,7 +26,6 @@ export const quoteSlice = type({
   slice_type: t.literal('quote'),
   slice_label: t.union([t.string, t.null]),
   primary: t.type({
-    quote_style: t.keyof({ Short: null, Long: null }),
     quote_content: richTextBlock,
     quote_attribution: t.string,
   }),

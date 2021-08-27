@@ -82,6 +82,14 @@ export const richTextBlock = t.array(
   }),
 );
 
+export type Image = t.TypeOf<typeof image>;
+export const image = type({
+  url: t.string,
+  alt: optional(t.string),
+  copyright: optional(t.string),
+  dimensions: type({ width: t.number, height: t.number }),
+});
+
 export type Headings = t.TypeOf<typeof headings>;
 export const headings = t.keyof({
   [Elements.heading1]: null,

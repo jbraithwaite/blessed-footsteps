@@ -10,6 +10,7 @@ export const Audio: React.FunctionComponent<SliceProps<AudioSlice>> = ({
   slice,
 }) => {
   const logger = useLogger();
+
   const title = slice.primary.audio_title[0];
 
   if (!title) {
@@ -18,7 +19,7 @@ export const Audio: React.FunctionComponent<SliceProps<AudioSlice>> = ({
   }
 
   return (
-    <figure className="bg-gray-50 rounded-lg px-10 py-7 my-5">
+    <figure className="bg-white rounded-lg px-10 py-7 my-12 filter drop-shadow-2xl">
       <figcaption className="font-bold mb-5">{title.text}</figcaption>
       <audio controls src={slice.primary.audio_clip.url} className="mb-5">
         Your browser does not support the

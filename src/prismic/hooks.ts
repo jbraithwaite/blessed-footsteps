@@ -8,7 +8,7 @@ import { JsonParse } from 'types/json';
 
 export function usePreview(documentId: string, activeRef: string | undefined) {
   const router = useRouter();
-  const ref = useRefFromCookie();
+  const ref = useRefFromCookie(!router.isPreview);
 
   React.useEffect(() => {
     if (ref.state === 'pending' || !router.isPreview) {
@@ -40,7 +40,7 @@ function getCookie(name: string): string | undefined {
   return parts.length === 2 ? parts.pop()?.split(';').shift() : undefined;
 }
 
-function useRefFromCookie(): failable.Failable<string> {
+function useRefFromCookie(disabled: boolean): failable.Failable<string> {
   const logger = useLogger();
   const [ref, setRef] = React.useState<failable.Failable<string>>(
     failable.pending(),
@@ -51,6 +51,10 @@ function useRefFromCookie(): failable.Failable<string> {
   const keyName = `${repositoryName}.prismic.io`;
 
   React.useEffect(() => {
+    if (disabled) {
+      return;
+    }
+
     const cookieValue = getCookie(cookieKey);
 
     if (!cookieValue) {
@@ -74,7 +78,7 @@ function useRefFromCookie(): failable.Failable<string> {
       });
       setRef(failable.failure(new Error('Issue finding the cookie value')));
     }
-  }, [logger, keyName, repositoryName]);
+  }, [logger, keyName, repositoryName, disabled]);
 
   return ref;
 }

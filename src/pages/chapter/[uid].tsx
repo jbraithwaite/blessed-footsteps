@@ -5,22 +5,30 @@ import {
 } from 'next-slicezone/hooks';
 import React from 'react';
 import { Link } from 'components/elements';
-import { Container } from 'components/layout';
+import { Page } from 'components/layout';
 import { Slices } from 'components/slices/Slices';
 import { UnknownSlice } from 'components/slices/types';
 import { Header } from 'components/typography/Header';
 import { client } from 'prismic/client';
 import { usePreview } from 'prismic/hooks';
-import { TitleBlock } from 'prismic/types';
+import * as types from 'prismic/types';
 
 const ChapterPage: React.FunctionComponent<ChapterPageProps> = (props) => {
   usePreview(props.id, props.previewData?.ref);
+
   const title = props.data.chapter_title[0]?.text;
+  const hero = props.data.chapter_hero;
 
   return (
-    <Container>
+    <Page>
+      {'url' in hero && (
+        <div
+          className="app-hero"
+          style={{ backgroundImage: `url(${hero.url})` }}
+        ></div>
+      )}
       {title && (
-        <div className="sm:-mx-24 text-center mb-24">
+        <div className="text-center mb-24 bg-white sm:max-w-5xl pt-10 sm:pt-12">
           <Header rank="1" styleLevel="display-1">
             <Link name="toc" basic>
               <a>{title}</a>
@@ -29,7 +37,7 @@ const ChapterPage: React.FunctionComponent<ChapterPageProps> = (props) => {
         </div>
       )}
       <Slices slices={props.data.body} />
-    </Container>
+    </Page>
   );
 };
 
@@ -67,7 +75,8 @@ export default ChapterPage;
 export interface ChapterPageProps {
   data: {
     body: UnknownSlice[];
-    chapter_title: TitleBlock;
+    chapter_title: types.TitleBlock;
+    chapter_hero: {} | types.Image;
   };
   preview: boolean | null;
   previewData: { ref?: string };
