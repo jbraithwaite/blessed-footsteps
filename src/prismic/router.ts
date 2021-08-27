@@ -54,6 +54,12 @@ export const routeDefinitions = {
       `/citation/${citationUid}`,
     path: '/citation/:uid',
   },
+  preview: {
+    href: () => '/api/preview',
+  },
+  exitPreview: {
+    href: () => '/api/exit-preview',
+  },
 };
 
 /**
