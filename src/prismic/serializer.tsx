@@ -1,3 +1,4 @@
+import cx from 'classnames';
 import NextLink from 'next/link';
 import { Elements, HTMLSerializer } from 'prismic-reactjs';
 import React from 'react';
@@ -32,13 +33,19 @@ export const htmlSerializer: HTMLSerializer<React.ReactNode> = function (
       );
 
     case Elements.image:
+      const isPortrait = element.dimensions.width > element.dimensions.height;
+
       return (
         // eslint-disable-next-line @next/next/no-img-element
         <img
           src={element.url}
-          alt={element.url}
+          alt={element.alt}
           width={element.dimensions.width}
           height={element.dimensions.height}
+          className={cx(
+            'app-image',
+            isPortrait ? 'app-image-portrait' : undefined,
+          )}
           key={key}
         />
       );
