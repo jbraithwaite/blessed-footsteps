@@ -9,3 +9,11 @@
 .app-page .app-hero {
   @apply w-screen h-screen max-w-full -mb-40 relative z-[-1] bg-cover bg-center;
 }
+
+.app-page .app-image {
+  @apply my-5 max-h-screen w-auto mx-auto;
+}
+
+.app-page .app-image.app-image-portrait {
+  @apply sm:w-full sm:max-w-4xl max-h-full;
+}
