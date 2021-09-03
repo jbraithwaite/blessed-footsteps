@@ -3,7 +3,11 @@ module.exports = {
   purge: ['./pages/**/*.{js,ts,jsx,tsx}', './src/**/*.{js,ts,jsx,tsx}'],
   darkMode: 'media',
   theme: {
-    extend: {},
+    extend: {
+      screens: {
+        print: { raw: 'print' },
+      },
+    },
   },
   variants: {
     extend: {},
