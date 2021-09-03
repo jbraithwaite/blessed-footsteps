@@ -28,7 +28,7 @@ const ChapterPage: React.FunctionComponent<ChapterPageProps> = (props) => {
         ></div>
       )}
       {title && (
-        <div className="text-center mb-24 bg-white sm:max-w-5xl pt-10 sm:pt-12">
+        <div className="text-center mb-12 bg-white sm:max-w-5xl pt-10 px-10 sm:pt-12 sm:px-12">
           <Header rank="1" styleLevel="display-1">
             <Link name="toc" basic>
               <a>{title}</a>

@@ -19,9 +19,9 @@ export const Audio: React.FunctionComponent<SliceProps<AudioSlice>> = ({
   }
 
   return (
-    <figure className="bg-white rounded-lg px-10 py-7 my-12 filter drop-shadow-2xl">
-      <figcaption className="font-bold mb-5">{title.text}</figcaption>
-      <audio controls src={slice.primary.audio_clip.url} className="mb-5">
+    <figure className="bg-white rounded-lg px-3 sm:px-10 py-7 my-12 filter drop-shadow-2xl print:hidden">
+      <figcaption className="font-bold">{title.text}</figcaption>
+      <audio controls src={slice.primary.audio_clip.url}>
         Your browser does not support the
         <code>audio</code> element.
       </audio>

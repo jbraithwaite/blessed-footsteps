@@ -20,17 +20,13 @@ export const htmlSerializer: HTMLSerializer<React.ReactNode> = function (
     case Elements.heading5:
     case Elements.heading6:
       return (
-        <h6 className="mb-5 font-bold text-lg" key={key}>
+        <h6 className="font-bold text-lg" key={key}>
           {children}
         </h6>
       );
 
     case Elements.paragraph:
-      return (
-        <p className="mb-5 oldstyle-nums" key={key}>
-          {children}
-        </p>
-      );
+      return <p key={key}>{children}</p>;
 
     case Elements.image:
       const isPortrait = element.dimensions.width > element.dimensions.height;
@@ -44,6 +40,7 @@ export const htmlSerializer: HTMLSerializer<React.ReactNode> = function (
           height={element.dimensions.height}
           className={cx(
             'app-image',
+            'px-0',
             isPortrait ? 'app-image-portrait' : undefined,
           )}
           key={key}

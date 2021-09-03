@@ -10,7 +10,7 @@ export const Page: React.FunctionComponent<PageProps> = ({
 
   return (
     <>
-      <div className={cx('app-page', className)}>{children}</div>
+      <div className={cx('app-page', 'pb-40', className)}>{children}</div>
       {isPreview && (
         <a
           onClick={() => push({ name: 'exitPreview' })}
