@@ -2,8 +2,33 @@
 @tailwind components;
 @tailwind utilities;
 
+/**
+ * Modified Lobotomized Owl
+ *
+ * tailwind doesn't support the `* + *` selector because of the `base` which is
+ * a css reset.
+ *
+ * @see https://alistapart.com/article/axiomatic-css-and-lobotomized-owls/
+ */
+body * + * {
+  @apply mt-5;
+}
+
+.margins-off * {
+  margin-top: 0;
+}
+
+/** Meant to have a low specificity, a class would mess this up and make it hard to override */
+body > * > * > * {
+  @apply px-5;
+}
+
 .app-page > * {
-  @apply max-w-full sm:max-w-2xl sm:mx-auto px-5;
+  @apply max-w-full sm:max-w-2xl sm:mx-auto;
+}
+
+.app-page p {
+  @apply oldstyle-nums;
 }
 
 .app-page .app-hero {

@@ -72,3 +72,4 @@ Setup a trigger on [Pipedream](https://pipedream.com/) to
 -   [Darkmode](https://tailwindcss.com/docs/dark-mode)
 -   Make search work when dynamic, do something else when static, maybe algolia?
 -   Print style
+-   Add a canonical url to ENV

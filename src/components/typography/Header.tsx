@@ -25,7 +25,7 @@ export const Header: React.FunctionComponent<HeaderProps> = ({
   return React.createElement(
     component,
     {
-      className: cx(styleMap[styleLevel ?? component], 'mt-5'),
+      className: cx(styleMap[styleLevel ?? component]),
       id,
       onClick: handleClick,
     },
@@ -63,10 +63,10 @@ const rankMap: Record<HeaderRank, HeadingLevel> = {
 };
 
 const styleMap: Record<HeaderStyleLevel, string> = {
-  'display-1': 'text-8xl mb-8 font-extralight',
-  'display-2': 'text-8xl mb-8 font-extralight',
-  'display-3': 'text-8xl mb-8 font-extralight',
-  'display-4': 'text-8xl mb-8 font-extralight',
+  'display-1': 'text-6xl sm:text-8xl mb-8 font-extralight',
+  'display-2': 'text-6xl sm:text-8xl mb-8 font-extralight',
+  'display-3': 'text-6xl sm:text-8xl mb-8 font-extralight',
+  'display-4': 'text-6xl sm:text-8xl mb-8 font-extralight',
   h1: 'text-4xl mb-8 font-light leading-snug',
   h2: 'text-3xl mb-4 font-light leading-snug',
   h3: 'text-2xl mb-3.5',
