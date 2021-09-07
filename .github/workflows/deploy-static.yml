@@ -28,6 +28,8 @@ jobs:
         env:
           PRISMIC_API_TOKEN: ${{ secrets.PRISMIC_ACCESS_TOKEN }}
           PRISMIC_REPOSITORY_NAME: ${{ secrets.PRISMIC_REPO_NAME }}
+          CANONICAL_DOMAIN: ${{ secrets.CANONICAL_DOMAIN }}
+          PLAUSIBLE_DOMAIN: ${{ secrets.PLAUSIBLE_DOMAIN }}
 
       # Next.js relies on a `_next` folder
       # https://github.blog/2009-12-29-bypassing-jekyll-on-github-pages/
