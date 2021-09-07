@@ -1,0 +1,40 @@
+{
+  "Main": {
+    "uid": {
+      "type": "UID",
+      "config": {
+        "label": "Citation Slug"
+      }
+    },
+    "citation_author": {
+      "type": "Text",
+      "config": {
+        "label": "Citation_Author"
+      }
+    },
+    "citation_title": {
+      "type": "Text",
+      "config": {
+        "label": "citation_title"
+      }
+    },
+    "citation_url": {
+      "type": "Text",
+      "config": {
+        "label": "Citation URL"
+      }
+    },
+    "citation_date": {
+      "type": "Text",
+      "config": {
+        "label": "Citation Date"
+      }
+    },
+    "citation_page": {
+      "type": "Text",
+      "config": {
+        "label": "Citation Page"
+      }
+    }
+  }
+}
