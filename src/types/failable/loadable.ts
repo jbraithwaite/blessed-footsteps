@@ -1,3 +1,5 @@
+import { useMemo, useState } from 'react';
+
 export interface Pending {
   state: 'pending';
   loading: false;
@@ -200,7 +202,27 @@ export interface Mutations<Value, E = Error> {
   pending: () => void;
 }
 
-export function buildMutations<Value, E = Error>(
+export function accept<Value, E = Error>(
+  mutations: Mutations<Value, E>,
+  promise: Promise<Value>,
+): void {
+  mutations.loading();
+  promise.then(mutations.success, mutations.failure);
+}
+
+export function useLoadableState<Result, E = Error>(
+  initialData?: Result,
+): [Loadable<Result, E>, Mutations<Result, E>] {
+  const [result, setResult] = useState<Loadable<Result, E>>(
+    initialData ? success(initialData) : pending(),
+  );
+
+  const mutations = useMemo(() => buildMutations(setResult), [setResult]);
+
+  return [result, mutations];
+}
+
+function buildMutations<Value, E = Error>(
   dispatchActionSetter: (
     actionSetter: (loadable: Loadable<Value, E>) => Loadable<Value, E>,
   ) => void,
@@ -211,12 +233,4 @@ export function buildMutations<Value, E = Error>(
     loading: () => dispatchActionSetter(toLoading),
     pending: () => dispatchActionSetter(pending),
   };
-}
-
-export function accept<Value, E = Error>(
-  mutations: Mutations<Value, E>,
-  promise: Promise<Value>,
-): void {
-  mutations.loading();
-  promise.then(mutations.success, mutations.failure);
 }
