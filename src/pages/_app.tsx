@@ -1,11 +1,17 @@
 import '../styles/index.css';
 import type { AppProps } from 'next/app';
 import * as React from 'react';
+import { AnalyticsProvider } from 'src/hooks/analytics';
 import { LoggerProvider } from 'src/hooks/logger';
 
 const MyApp: React.FunctionComponent<AppProps> = ({ Component, pageProps }) => {
   return (
-    <ApplyProviders providers={[<LoggerProvider key="logger" />]}>
+    <ApplyProviders
+      providers={[
+        <LoggerProvider key="logger" />,
+        <AnalyticsProvider key="analytics" />,
+      ]}
+    >
       <Component {...pageProps} />
     </ApplyProviders>
   );
