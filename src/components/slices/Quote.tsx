@@ -15,7 +15,9 @@ export const Quote: React.FunctionComponent<SliceProps<QuoteSlice>> = ({
         render={slice.primary.quote_content}
         htmlSerializer={htmlSerializer}
       />
-      <cite>— {slice.primary.quote_attribution}</cite>
+      {slice.primary.quote_attribution && (
+        <cite>— {slice.primary.quote_attribution}</cite>
+      )}
     </blockquote>
   );
 };
@@ -27,6 +29,6 @@ export const quoteSlice = type({
   slice_label: t.union([t.string, t.null]),
   primary: t.type({
     quote_content: richTextBlock,
-    quote_attribution: t.string,
+    quote_attribution: t.union([t.string, t.null]),
   }),
 });
