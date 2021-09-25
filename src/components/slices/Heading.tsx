@@ -20,7 +20,7 @@ export const Heading: React.FunctionComponent<SliceProps<HeadingSlice>> = ({
   }
 
   return (
-    <Header rank={rankMap[heading.type]} anchor>
+    <Header rank={rankMap[heading.type]} styleLevel="basic" anchor>
       {heading.text}
     </Header>
   );

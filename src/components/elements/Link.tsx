@@ -34,7 +34,7 @@ export const Link: React.FunctionComponent<LinkProps> = ({
   return (
     <NextLink href={href}>
       {React.cloneElement(child, {
-        className: cx(child.props.className, !basic && defaultLinkClassNames),
+        className: cx(child.props.className),
       })}
     </NextLink>
   );
@@ -50,5 +50,3 @@ export type LinkProps = {
       basic?: boolean;
     };
 }[keyof RouteParamsMap];
-
-export const defaultLinkClassNames = 'underline hover:text-blue-600';
