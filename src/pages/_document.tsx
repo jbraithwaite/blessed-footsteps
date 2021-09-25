@@ -5,7 +5,6 @@ import Document, {
   NextScript,
   DocumentContext,
 } from 'next/document';
-import { PRISMIC_REPOSITORY_NAME } from 'prismic/client';
 
 class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {
@@ -20,18 +19,21 @@ class MyDocument extends Document {
     return (
       <Html>
         <Head>
-          <script
-            async
-            defer
-            src={`https://static.cdn.prismic.io/prismic.js?new=true&repo=${PRISMIC_REPOSITORY_NAME}`}
-          ></script>
           {canonicalDomain && plausibleDomain && (
-            <script
-              async
-              defer
-              data-domain={canonicalDomain.replace('www.', '')}
-              src={`https://${plausibleDomain}/js/plausible.js`}
-            ></script>
+            <>
+              <script
+                async
+                defer
+                data-domain={canonicalDomain.replace('www.', '')}
+                src={`https://${plausibleDomain}/js/plausible.js`}
+              ></script>
+              <script
+                dangerouslySetInnerHTML={{
+                  __html:
+                    'window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }',
+                }}
+              ></script>
+            </>
           )}
         </Head>
         <body>

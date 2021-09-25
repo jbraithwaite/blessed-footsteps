@@ -10,11 +10,11 @@ import { useLogger } from 'src/hooks/logger';
 
 export const Slices: React.FunctionComponent<SlicesProps> = ({ slices }) => {
   return (
-    <>
+    <div className="prose prose-sm sm:prose lg:prose-lg xl:prose-xl">
       {slices.map((slice, index) => (
         <SingleSlice slice={slice} key={index} />
       ))}
-    </>
+    </div>
   );
 };
 

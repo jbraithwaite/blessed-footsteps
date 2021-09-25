@@ -2,7 +2,7 @@ import cx from 'classnames';
 import NextLink from 'next/link';
 import { Elements, HTMLSerializer } from 'prismic-reactjs';
 import React from 'react';
-import { defaultLinkClassNames } from 'components/elements/Link';
+import { Hyperlink } from './types';
 import { Ol } from 'components/typography/Ol';
 
 export const htmlSerializer: HTMLSerializer<React.ReactNode> = function (
@@ -57,10 +57,15 @@ export const htmlSerializer: HTMLSerializer<React.ReactNode> = function (
       );
 
     case Elements.hyperlink:
-      return (
-        <NextLink href={element.data.url} key={key}>
-          <a className={defaultLinkClassNames}>{children}</a>
+      const hyperlink = element.data as Hyperlink;
+
+      return hyperlink.url ? (
+        <NextLink href={hyperlink.url} key={key}>
+          <a>{children}</a>
         </NextLink>
+      ) : (
+        // todo: Fix document link
+        <>[Fix me]</>
       );
 
     // Return null to stick with the default behavior for all other elements

@@ -51,7 +51,8 @@ export type HeaderStyleLevel =
   | 'display-1'
   | 'display-2'
   | 'display-3'
-  | 'display-4';
+  | 'display-4'
+  | 'basic';
 
 const rankMap: Record<HeaderRank, HeadingLevel> = {
   1: 'h1',
@@ -67,6 +68,7 @@ const styleMap: Record<HeaderStyleLevel, string> = {
   'display-2': 'text-6xl sm:text-8xl mb-8 font-extralight',
   'display-3': 'text-6xl sm:text-8xl mb-8 font-extralight',
   'display-4': 'text-6xl sm:text-8xl mb-8 font-extralight',
+  basic: '',
   h1: 'text-4xl mb-8 font-light leading-snug',
   h2: 'text-3xl mb-4 font-light leading-snug',
   h3: 'text-2xl mb-3.5',

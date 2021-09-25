@@ -29,7 +29,8 @@ export const elements = t.keyof({
   [Elements.span]: null,
 });
 
-export const link = type({
+export type Hyperlink = t.TypeOf<typeof hyperlink>;
+export const hyperlink = type({
   link_type: optional(
     t.keyof({
       Web: null,
@@ -64,7 +65,9 @@ export const richTextSpan = type({
     [Elements.label]: null,
   }),
   // text: t.string,
-  data: optional(t.intersection([link, type({ label: optional(t.string) })])),
+  data: optional(
+    t.intersection([hyperlink, type({ label: optional(t.string) })]),
+  ),
 });
 
 export type RichTextBlock = t.TypeOf<typeof richTextBlock>;
@@ -77,7 +80,7 @@ export const richTextBlock = t.array(
     copyright: optional(t.union([t.string, t.null])),
     dimensions: optional(type({ width: t.number, height: t.number })),
     url: optional(t.string),
-    linkTo: optional(link),
+    linkTo: optional(hyperlink),
     oembed: optional(t.unknown),
   }),
 );
