@@ -26,7 +26,7 @@ export const Checkbox: React.FunctionComponent<CheckboxProps> = ({
 };
 
 export interface CheckboxProps {
-  label?: string;
+  label?: React.ReactNode;
   value: string;
   onChange: (value: string) => void;
 }
