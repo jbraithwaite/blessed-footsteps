@@ -1,6 +1,5 @@
 import * as React from 'react';
 import cx from 'classnames';
-import { getSortedRoutes } from 'next/dist/shared/lib/router/utils';
 
 export const Select: React.FunctionComponent<SelectProps> = ({
   options,
@@ -44,14 +43,3 @@ export interface SelectOption {
   name: string;
   value: string;
 }
-
-function getUser(id) {
-  return fetch(url, { data: id });
-}
-
-const user = await getUser(1);
-const order = await getOrders(user.id);
-
-getUser(1).then((user) => {
-  getSortedRoutes(user.id).then((order) => {});
-});
