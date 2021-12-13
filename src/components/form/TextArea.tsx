@@ -1,6 +1,6 @@
 import cx from 'classnames';
 import * as React from 'react';
-import { AutoComplete, HTMLProps } from 'src/utils';
+import { HTMLProps } from 'src/utils';
 
 export const TextArea: React.FunctionComponent<TextAreaProps> = ({
   value,
