@@ -95,7 +95,7 @@ export interface Validator<Value, InputType = string> {
 }
 
 export interface Input<T extends any> {
-  validate: () => Validation<T>;
+  validate: (options?: {silent: boolean}) => Validation<T>;
   reset: () => void;
   formGroupProps: {
     required: boolean;
@@ -142,7 +142,11 @@ export function useInput<T>(
     clearErrors();
   }, [defaultValue, clearErrors]);
 
-  const validate = React.useCallback(() => {
+  const validate = React.useCallback((options?: {silent: boolean}) => {
+    if (options?.silent) {
+      return validator.validate(value, context);
+    }
+
     clearErrors();
     const validation = validator.validate(value, context);
 

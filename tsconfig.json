@@ -24,7 +24,8 @@
       "components/*": ["src/components/*"],
       "prismic/*": ["src/prismic/*"],
       "types/*": ["src/types/*"]
-    }
+    },
+    "incremental": true
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
   "typeRoots": ["./node_modules/@types", "./typings"],
