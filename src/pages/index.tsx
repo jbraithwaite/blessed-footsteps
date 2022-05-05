@@ -23,13 +23,13 @@ const Home: NextPage = () => {
         </p>
         <p>
           This question is explored by focusing on just 24 days of the 77 years
-          in the life `Abdu'l-Bahá during his October 1912 journey in
-          California. `Abdu'l-Bahá set out in 1911, at the age of 67, to
+          in the life `Abdu&apos;l-Bahá during his October 1912 journey in
+          California. `Abdu&apos;l-Bahá set out in 1911, at the age of 67, to
           familiarize those living in Europe and North America of the renewal of
           the ancient Faith of God. His overall purpose was simply to promote
           true human happiness according to the heavenly principles and guidance
-          revealed in the Writings of Bahá’u’lláh, 'Abdu'l-Bahá’s father, the
-          founder of the Bahá’í Faith.
+          revealed in the Writings of Bahá’u’lláh, `Abdu&apos;l-Bahá’s father,
+          the founder of the Bahá’í Faith.
         </p>
         <p>
           <strong>BlessedFootsteps.org</strong> is an ever-growing website
