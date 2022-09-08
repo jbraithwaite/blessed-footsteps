@@ -1,7 +1,7 @@
+import { Header } from '@atoms/Header';
+import { NewsletterSignup } from '@templates/NewsletterSignup';
 import type { NextPage } from 'next';
 import React from 'react';
-import { NewsletterSignup } from 'components/modules/NewsletterSignup';
-import { Header } from 'components/typography/Header';
 
 const Home: NextPage = () => {
   return (

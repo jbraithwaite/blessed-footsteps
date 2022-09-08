@@ -1,12 +1,9 @@
-import { NextApiHandler } from 'next';
+import { NextApiRequest, NextApiResponse } from 'next';
+import { exitPreview } from '@prismicio/next';
 
-const exitPreview: NextApiHandler = (_, res) => {
-  // Exit the current user from "Preview Mode". This function accepts no args.
-  res.clearPreviewData();
-
-  // Redirect the user back to the index page.
-  res.writeHead(307, { Location: '/' });
-  res.end();
-};
-
-export default exitPreview;
+export default function handler(
+  req: NextApiRequest,
+  res: NextApiResponse,
+): void {
+  exitPreview({ req, res });
+}

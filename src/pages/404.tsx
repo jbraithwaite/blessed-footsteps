@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useRouter } from 'prismic/router';
+import { useRouter } from 'src/hooks/useRouter';
 
 export const Custom404: React.FunctionComponent<Custom404Props> = () => {
   const router = useRouter();

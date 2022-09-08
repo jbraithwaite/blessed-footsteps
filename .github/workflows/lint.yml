@@ -12,19 +12,10 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-        with:
-          # Make sure the actual branch is checked out when running on pull requests
-          ref: ${{ github.head_ref }}
+      - uses: actions/checkout@v3
 
-      - name: install node
-        uses: actions/setup-node@v2
-        with:
-          node-version: 16
-
-      - name: yarn install
-        run: yarn install --production=false
+      - name: Yarn install
+        uses: ./.github/actions/yarn-install
 
       - name: lint
         run: yarn lint
-
