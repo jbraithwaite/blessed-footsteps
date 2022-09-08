@@ -1,35 +1,51 @@
-import { ApolloClient, InMemoryCache } from '@apollo/client';
-import Prismic from '@prismicio/client';
-import { ApiOptions } from '@prismicio/client/types/Api';
-import { DefaultClient } from '@prismicio/client/types/client';
-import { PrismicLink } from 'apollo-link-prismic';
-import { routes } from './router';
+import * as prismic from '@prismicio/client';
+import { LinkResolverFunction } from '@prismicio/helpers';
+import { CreateClientConfig, enableAutoPreviews } from '@prismicio/next';
+import { routes } from '../hooks/useRouter';
 
-const accessToken = process.env.PRISMIC_API_TOKEN;
-
-if (!accessToken) {
+if (!process.env.PRISMIC_API_TOKEN) {
   throw new Error('Environment variable `PRISMIC_API_TOKEN` not set');
 }
+
+const accessToken = process.env.PRISMIC_API_TOKEN;
 
 if (!process.env.PRISMIC_REPOSITORY_NAME) {
   throw new Error('Environment variable `PRISMIC_REPOSITORY_NAME` not set');
 }
 
-export const PRISMIC_REPOSITORY_NAME = process.env.PRISMIC_REPOSITORY_NAME;
+export const repositoryName = process.env.PRISMIC_REPOSITORY_NAME;
 
-const API_ENDPOINT = `https://${PRISMIC_REPOSITORY_NAME}.cdn.prismic.io/api/v2`;
-const GRAPHQL_ENDPOINT = `http://${PRISMIC_REPOSITORY_NAME}.prismic.io/graphql`;
+const API_ENDPOINT = `https://${repositoryName}.cdn.prismic.io/api/v2`;
 
-export const graphql = new ApolloClient({
-  link: PrismicLink({
-    uri: GRAPHQL_ENDPOINT,
+export const linkResolver: LinkResolverFunction = (doc): string => {
+  const route = routes.find(({ type }) => doc.type === type);
+
+  if (doc.uid === undefined) {
+    throw new Error('Missing uid');
+  }
+
+  if (route?.path && doc.uid) {
+    return route.path.replace(':uid', doc.uid);
+  }
+
+  // Fallback
+  return `/${doc.uid}`;
+};
+
+export const createClient = (
+  config: CreateClientConfig = {},
+): prismic.Client => {
+  const client = prismic.createClient(API_ENDPOINT, {
     accessToken,
-  }),
-  cache: new InMemoryCache(),
-});
+    routes,
+    ...config,
+  });
 
-export const client = (
-  req: Request | null = null,
-  options: ApiOptions = {},
-): DefaultClient =>
-  Prismic.client(API_ENDPOINT, { accessToken, routes, req, ...options });
+  enableAutoPreviews({
+    client,
+    previewData: config.previewData,
+    req: config.req,
+  });
+
+  return client;
+};

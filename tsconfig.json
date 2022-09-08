@@ -21,9 +21,12 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "paths": {
-      "components/*": ["src/components/*"],
-      "prismic/*": ["src/prismic/*"],
-      "types/*": ["src/types/*"]
+      "@atoms/*": ["src/components/atoms/*"],
+      "@hooks/*": ["src/hooks/*"],
+      "@molecules/*": ["src/components/molecules/*"],
+      "@templates/*": ["src/components/templates/*"],
+      "@utils/*": ["src/utils/*"],
+      "@prismic/*": ["src/prismic/*"]
     },
     "incremental": true
   },

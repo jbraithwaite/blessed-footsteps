@@ -1,0 +1,25 @@
+name: Yarn Install
+
+inputs:
+  node-version:
+    default: '16'
+    required: false
+    type: string
+
+outputs:
+  node-version:
+    value: ${{ steps.install.outputs.node-version }}
+
+runs:
+  using: 'composite'
+  steps:
+    - uses: actions/setup-node@v3
+      with:
+        node-version: ${{ inputs.node-version }}
+        cache: 'yarn'
+    - id: install
+      name: Install dependencies
+      shell: bash
+      run: |
+        yarn install --immutable
+        echo "::set-output name=node-version::${{ inputs.node-version }}"
