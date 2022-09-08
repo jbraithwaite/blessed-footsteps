@@ -19,12 +19,12 @@ export const Select: React.FunctionComponent<SelectProps> = ({
       onChange={onChange}
       value={value}
       className={cx(
-        'mt-1 block w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0',
+        'mt-1 block w-full rounded-md border-transparent bg-gray-100 focus:border-gray-500 focus:bg-white focus:ring-0',
         error ? 'border-red-600' : 'border-transparent',
       )}
     >
-      {options.map(({ name, value }, index) => (
-        <option key={index} value={value}>
+      {options.map(({ name, value: optionValue }) => (
+        <option key={name + value} value={optionValue}>
           {name}
         </option>
       ))}

@@ -5,12 +5,12 @@ export interface TimelineProps {}
 
 export const Timeline: React.FunctionComponent<TimelineProps> = () => {
   return (
-    <main className="max-w-full py-20 px-5 sm:px-24 sm:max-w-5xl sm:mx-auto">
+    <main className="max-w-full py-20 px-5 sm:mx-auto sm:max-w-5xl sm:px-24">
       <Header rank="1" styleLevel="display-1">
         Timeline of ʻAbdu&apos;l‑Bahá&rsqou;s visit to California in 1912
       </Header>
 
-      <div className="prose prose-sm sm:prose lg:prose-lg xl:prose-xl mb-5">
+      <div className="prose prose-sm mb-5 sm:prose lg:prose-lg xl:prose-xl">
         <p>
           <strong>
             The talks in bold have been preserved the volume:{' '}

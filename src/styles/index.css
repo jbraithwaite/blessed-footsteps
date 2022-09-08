@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .app-page > * {
-  @apply max-w-full sm:max-w-2xl sm:mx-auto;
+  @apply max-w-full sm:mx-auto sm:max-w-2xl;
 }
 
 .app-page p {
@@ -11,13 +11,13 @@
 }
 
 .app-page .app-hero {
-  @apply w-screen h-screen max-w-full -mb-40 relative z-[-1] bg-cover bg-center;
+  @apply relative z-[-1] -mb-40 h-screen w-screen max-w-full bg-cover bg-center;
 }
 
 .app-page .app-image {
-  @apply my-5 max-h-screen w-auto mx-auto;
+  @apply my-5 mx-auto max-h-screen w-auto;
 }
 
 .app-page .app-image.app-image-portrait {
-  @apply sm:w-full sm:max-w-4xl max-h-full;
+  @apply max-h-full sm:w-full sm:max-w-4xl;
 }

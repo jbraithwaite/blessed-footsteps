@@ -1,3 +1,5 @@
 .next
 .vscode
+out
 src/prismic/types.generated.ts
+.yarn

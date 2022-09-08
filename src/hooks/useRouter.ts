@@ -1,5 +1,5 @@
 import { useRouter as useNextRouter } from 'next/router';
-import { defined, constVoid } from 'src/utils/function';
+import { defined, constVoid } from '@utils/function';
 
 export interface RouteDefinition<T extends {}> {
   href: (params: T) => string;

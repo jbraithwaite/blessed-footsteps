@@ -4,7 +4,7 @@ export const Ol: React.FunctionComponent<React.PropsWithChildren<OlProps>> = ({
   children,
 }) => {
   return (
-    <ol className="list-decimal list-inside sm:list-outside">{children}</ol>
+    <ol className="list-inside list-decimal sm:list-outside">{children}</ol>
   );
 };
 

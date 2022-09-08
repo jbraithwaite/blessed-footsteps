@@ -1,7 +1,7 @@
 import '../styles/index.css';
 import type { AppProps } from 'next/app';
 import * as React from 'react';
-import { AnalyticsProvider } from 'src/hooks/providers/analytics';
+import { AnalyticsProvider } from '@hooks/providers/analytics';
 import { repositoryName } from '@prismic/client';
 import { PrismicPreview } from '@prismicio/next';
 
@@ -24,6 +24,7 @@ const ApplyProviders: React.FunctionComponent<{
   providers: React.ReactElement[];
   children: React.ReactNode;
 }> = ({ providers, children }) => {
+  // eslint-disable-next-line react/jsx-no-useless-fragment
   return providers.reduceRight(nestChildrenReducer, <>{children}</>);
 };
 

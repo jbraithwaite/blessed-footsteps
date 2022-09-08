@@ -1,12 +1,12 @@
 import cx from 'classnames';
 import NextLink, { LinkProps as NextLinkProps } from 'next/link';
 import * as React from 'react';
-import { routeDefinitions, RouteParamsMap } from 'src/hooks/useRouter';
-import { logger } from 'src/utils/logger';
+import { routeDefinitions, RouteParamsMap } from '@hooks/useRouter';
+import { logger } from '@utils/logger';
 
 export const Link: React.FunctionComponent<
   React.PropsWithChildren<LinkProps>
-> = ({ name, basic, children, query, hash, ...params }) => {
+> = ({ name, children, query, hash, ...params }) => {
   const route = routeDefinitions[name];
   const queryString = query ? '?' + query : '';
   const hashString = hash ? '#' + hash : '';

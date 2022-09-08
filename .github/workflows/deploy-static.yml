@@ -11,10 +11,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-
       - name: Yarn install
         uses: ./.github/actions/yarn-install
-
       - name: Build & Export
         run: |
           yarn build
@@ -24,7 +22,6 @@ jobs:
           PRISMIC_REPOSITORY_NAME: ${{ secrets.PRISMIC_REPO_NAME }}
           CANONICAL_DOMAIN: ${{ secrets.CANONICAL_DOMAIN }}
           PLAUSIBLE_DOMAIN: ${{ secrets.PLAUSIBLE_DOMAIN }}
-
       # Next.js relies on a `_next` folder
       # https://github.blog/2009-12-29-bypassing-jekyll-on-github-pages/
       # GitHub Pages relies on /404.html
@@ -32,7 +29,6 @@ jobs:
         run: |
           touch out/.nojekyll
           mv out/404/index.html out/404.html && rm -r out/404
-
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@4.1.4
         with:
