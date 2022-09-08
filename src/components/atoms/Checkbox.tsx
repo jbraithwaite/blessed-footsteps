@@ -16,7 +16,7 @@ export const Checkbox: React.FunctionComponent<CheckboxProps> = ({
     <label className="inline-flex items-center">
       <input
         type="checkbox"
-        className="rounded bg-gray-200 border-transparent focus:border-transparent focus:bg-gray-200 text-gray-700 focus:ring-1 focus:ring-offset-2 focus:ring-gray-500"
+        className="rounded border-transparent bg-gray-200 text-gray-700 focus:border-transparent focus:bg-gray-200 focus:ring-1 focus:ring-gray-500 focus:ring-offset-2"
         checked={value === 'true'}
         onChange={onClick}
       />

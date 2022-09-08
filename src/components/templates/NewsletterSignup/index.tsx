@@ -110,21 +110,21 @@ export const NewsletterSignup = () => {
         </div>
       </div>
       {errors.length > 0 && (
-        <div className="text-red-600 bg-red-50 py-2 px-3">
-          <>{errors.join(', ')}</>
+        <div className="bg-red-50 py-2 px-3 text-red-600">
+          {errors.join(', ')}
         </div>
       )}
       {error && (
-        <div className="text-red-600 bg-red-50 py-2 px-3">
+        <div className="bg-red-50 py-2 px-3 text-red-600">
           Could not subscribe at this time. Please try again later.
         </div>
       )}
       <button
-        className={`px-10 py-4 text-lg text-center space-x-2 rounded-md ${
+        className={`space-x-2 rounded-md px-10 py-4 text-center text-lg ${
           isMutating
             ? 'bg-gray-300 text-gray-50'
             : 'bg-gray-800 text-gray-300 shadow-lg hover:bg-gray-700'
-        }  leading-5 font-medium transition ease-in-out duration-100`}
+        }  font-medium leading-5 transition duration-100 ease-in-out`}
         disabled={isMutating}
         onClick={trigger}
       >

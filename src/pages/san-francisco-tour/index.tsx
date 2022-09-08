@@ -9,7 +9,7 @@ export interface SfTourProps {
 
 export const SfTour: React.FunctionComponent<SfTourProps> = ({ locations }) => {
   return (
-    <main className="max-w-full py-20 px-5 sm:px-24 sm:max-w-5xl sm:mx-auto">
+    <main className="max-w-full py-20 px-5 sm:mx-auto sm:max-w-5xl sm:px-24">
       <Header rank="1" styleLevel="display-1">
         San Francisco Tour
       </Header>

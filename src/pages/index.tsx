@@ -5,11 +5,11 @@ import React from 'react';
 
 const Home: NextPage = () => {
   return (
-    <main className="max-w-full py-20 px-5 sm:px-24 sm:max-w-5xl sm:mx-auto">
+    <main className="max-w-full py-20 px-5 sm:mx-auto sm:max-w-5xl sm:px-24">
       <Header rank="1" styleLevel="display-1">
         Blessed Footsteps
       </Header>
-      <div className="prose prose-sm sm:prose lg:prose-lg xl:prose-xl mb-5">
+      <div className="prose prose-sm mb-5 sm:prose lg:prose-lg xl:prose-xl">
         <h2>`Abdu&apos;l-Bahá&apos;s Visit to California</h2>
         <p>
           How could the universal message of peace and unity of a mid-19th
@@ -43,14 +43,14 @@ const Home: NextPage = () => {
         </p>
       </div>
 
-      <div className="p-5 bg-white filter drop-shadow-2xl rounded-2xl mt-10 ">
-        <strong className="block text-2xl text-gray-800 mb-5">
+      <div className="mt-10 rounded-2xl bg-white p-5 drop-shadow-2xl filter ">
+        <strong className="mb-5 block text-2xl text-gray-800">
           Receive updates
         </strong>
         <NewsletterSignup />
       </div>
 
-      <footer className="text-gray-300 text-center text-xs my-10">
+      <footer className="my-10 text-center text-xs text-gray-300">
         © {new Date().getFullYear()} Blessed Footsteps |{' '}
         <a href="mailto:tracingsacredfootsteps@gmail.com?subject=blessedfootsteps.org">
           Contact

@@ -10,11 +10,7 @@ export const FormGroup: React.FunctionComponent<
         {required && <span className="text-red-600">*</span>}
       </span>
       {children}
-      {errors && (
-        <div className="text-red-600 mt-1">
-          <>{errors.join(', ')}</>
-        </div>
-      )}
+      {errors && <div className="mt-1 text-red-600">{errors.join(', ')}</div>}
     </label>
   );
 };

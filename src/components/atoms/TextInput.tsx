@@ -23,7 +23,7 @@ export const TextInput: React.FunctionComponent<TextInputProps> = ({
       value={value}
       onChange={didChange}
       className={cx(
-        'mt-1 block w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0',
+        'mt-1 block w-full rounded-md border-transparent bg-gray-100 focus:border-gray-500 focus:bg-white focus:ring-0',
         error ? 'border-red-600' : 'border-transparent',
       )}
     />

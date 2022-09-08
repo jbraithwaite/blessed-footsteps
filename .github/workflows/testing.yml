@@ -1,4 +1,4 @@
-name: Lint
+name: Testing
 
 on:
   push:
@@ -13,9 +13,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-
       - name: Yarn install
         uses: ./.github/actions/yarn-install
-
       - name: lint
         run: yarn lint
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Yarn install
+        uses: ./.github/actions/yarn-install
+      - name: check
+        run: yarn check
