@@ -33,7 +33,7 @@ const Home: NextPage = () => {
         </p>
         <p>
           <strong>BlessedFootsteps.org</strong> is an ever-growing website
-          serving as a repository for the many personal accounts of whose who
+          serving as a repository for the many personal accounts of those who
           encountered `Abdu’l-Bahá while visiting California. Additionally,
           photos and newspaper articles from the time will be included along
           with information about visiting sacred places blessed by
