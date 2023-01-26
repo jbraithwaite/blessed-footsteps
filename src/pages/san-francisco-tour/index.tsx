@@ -4,71 +4,116 @@ import { TourLocationDocument } from '@prismic/types.generated';
 import { PrismicImage, PrismicRichText } from '@prismicio/react';
 import { GetStaticProps } from 'next';
 import * as React from 'react';
+import { Map, Marker } from '../../components/molecules/Map';
+
+import { DM_Serif_Display } from '@next/font/google';
+import { Wrapper } from '@googlemaps/react-wrapper';
+import { defined } from '@utils/function';
+
+const font = DM_Serif_Display({
+  weight: '400',
+  subsets: ['latin'],
+});
 
 export interface SfTourProps {
   locations: TourLocation[];
 }
 
-export const SfTour: React.FunctionComponent<SfTourProps> = ({ locations }) => {
-  return (
-    <main className="max-w-full py-20 px-5 sm:mx-auto sm:max-w-5xl sm:px-24">
-      <div className="prose-sm mb-10 sm:prose lg:prose-lg xl:prose-xl">
-        <h1>Remembering &#39;Abdu&#39;l-Bahá’s Time in San Francisco, 1912</h1>
-      </div>
+const googleMapsApiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
+const sanFranciscoPosition = { lat: 37.7576948, lng: -122.4726192 };
 
-      <div className="flex max-w-3xl flex-col space-y-16">
+export const SfTour: React.FunctionComponent<SfTourProps> = ({ locations }) => {
+  const [currentLocation, setCurrentLocation] = React.useState<
+    string | undefined
+  >();
+
+  React.useEffect(() => {
+    if (currentLocation) {
+      console.log({ currentLocation });
+    }
+  }, [currentLocation]);
+
+  const positions = React.useMemo(() => {
+    return locations
+      .map(({ data: { tour_coords }, uid }) =>
+        tour_coords?.latitude && tour_coords?.longitude
+          ? { lat: tour_coords.latitude, lng: tour_coords.longitude, uid }
+          : undefined,
+      )
+      .filter(defined);
+  }, [locations]);
+
+  return (
+    <main className=" bg-neutral-100">
+      <section className="flex h-[100vh] justify-center bg-[url('/ferry-building-san-francisco-1912-mobile.jpg')] bg-cover bg-center bg-no-repeat text-center md:bg-[url('/ferry-building-san-francisco-1912.jpg')]	md:bg-left ">
+        <h1
+          className={`${font.className} max-w-5xl bg-gradient-to-t from-gray-600 to-gray-400 bg-clip-text pt-5 text-5xl text-transparent drop-shadow invert-0 sm:text-7xl md:pt-16 md:text-8xl lg:pt-20`}
+        >
+          Remembering{' '}
+          <span className="whitespace-nowrap">&#39;Abdu&#39;l-Bahá’s</span> Time
+          in <span className="whitespace-nowrap">San Francisco</span>, 1912
+        </h1>
+      </section>
+      <section className="container mx-auto grid grid-cols-1 gap-4 pt-5 md:grid-cols-3 lg:grid-cols-4">
         {locations.map(
           ({ uid, id, data: { tour_title, tour_blub, tour_main_image } }) =>
             tour_title[0]?.text ? (
-              <article className="md:grid md:grid-cols-4 md:items-baseline">
-                <div className="group relative flex flex-col items-start md:col-span-3">
-                  <h2 className="text-base font-semibold tracking-tight text-zinc-800 ">
-                    <div className="absolute -inset-y-6 -inset-x-4 z-0 scale-95 bg-zinc-50 opacity-0 transition group-hover:scale-100 group-hover:opacity-100  sm:-inset-x-6 sm:rounded-2xl"></div>
-                    <Link name="sfTourLocation" tourLocationUid={uid} key={id}>
-                      <a>
-                        <span className="absolute -inset-y-6 -inset-x-4 z-20 sm:-inset-x-6 sm:rounded-2xl"></span>
-                        <span className="relative z-10">
-                          {tour_title[0].text}
-                        </span>
+              <article key={id}>
+                <div className="max-w-md rounded-lg bg-white py-4 px-8 shadow-lg">
+                  {/* <div>
+                    <img src="https://via.placeholder.com/150" alt="" />
+                  </div> */}
+                  <div>
+                    <h2 className={`text-3xl text-gray-800 ${font.className}`}>
+                      {tour_title[0].text}
+                    </h2>
+                    {tour_blub && (
+                      <div className="mt-2 text-gray-600">
+                        <PrismicRichText field={tour_blub} />
+                      </div>
+                    )}
+                  </div>
+                  <div className="mt-4 flex justify-end">
+                    <Link name="sfTourLocation" tourLocationUid={uid}>
+                      <a
+                        href="#"
+                        className="text-xl font-medium text-indigo-500"
+                      >
+                        Learn More
                       </a>
                     </Link>
-                  </h2>
-                  <div className="relative z-10 order-first mb-3 flex items-center md:hidden">
-                    <PrismicImage field={tour_main_image} />
                   </div>
-                  {tour_blub && (
-                    <span className="relative z-10 mt-2 text-sm text-zinc-600 ">
-                      <PrismicRichText field={tour_blub} />
-                    </span>
-                  )}
+                </div>
 
-                  <div
-                    aria-hidden="true"
-                    className="text--700 relative z-10 mt-4 flex items-center text-sm font-medium"
-                  >
-                    Read article
-                    <svg
-                      viewBox="0 0 16 16"
-                      fill="none"
-                      aria-hidden="true"
-                      className="ml-1 h-4 w-4 stroke-current"
-                    >
-                      <path
-                        d="M6.75 5.75 9.25 8l-2.5 2.25"
-                        strokeWidth="1.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      ></path>
-                    </svg>
-                  </div>
-                </div>
-                <div className="relative z-10 order-first mt-1 mb-3 hidden items-center pr-10 md:block">
-                  <PrismicImage field={tour_main_image} />
-                </div>
+                {/* <PrismicImage field={tour_main_image} /> */}
               </article>
             ) : null,
         )}
-      </div>
+      </section>
+      {googleMapsApiKey && (
+        <Wrapper
+          apiKey={googleMapsApiKey}
+          render={(status: string) => <div>{status}</div>}
+        >
+          <Map
+            center={sanFranciscoPosition}
+            zoom={12}
+            style={{ width: '100%', height: '100vh' }}
+          >
+            {positions.map(({ lat, lng, uid }, i) => (
+              <Marker
+                key={uid}
+                position={{ lat, lng }}
+                clickable
+                label={`${i + 1}`}
+                onClick={() => {
+                  setCurrentLocation(uid);
+                }}
+              />
+            ))}
+          </Map>
+        </Wrapper>
+      )}
     </main>
   );
 };
@@ -87,28 +132,27 @@ export const getStaticProps: GetStaticProps<SfTourProps> = async ({
         'tour_location.tour_title',
         'tour_location.tour_blub',
         'tour_location.tour_main_image',
+        'tour_location.tour_coords',
       ],
     })) as TourLocation[];
-  } catch (e) {
-    console.log(e);
 
+    return {
+      props: {
+        locations,
+      },
+    };
+  } catch (e) {
     return {
       props: {
         locations: [],
       },
     };
   }
-
-  return {
-    props: {
-      locations,
-    },
-  };
 };
 
 type TourLocation = Omit<TourLocationDocument, 'data'> & {
   data: Pick<
     TourLocationDocument['data'],
-    'tour_title' | 'tour_blub' | 'tour_main_image'
+    'tour_title' | 'tour_blub' | 'tour_main_image' | 'tour_coords'
   >;
 };

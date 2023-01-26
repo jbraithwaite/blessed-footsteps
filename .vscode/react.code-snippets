@@ -1,0 +1,58 @@
+{
+  "useEffect": {
+    "scope": "typescript,typescriptreact",
+    "prefix": ["rue", "useeffect"],
+    "body": ["React.useEffect(()=> {", "  $1", "}, [$2]);"],
+    "description": "React useEffect hook"
+  },
+  "useCallback": {
+    "scope": "typescript,typescriptreact",
+    "prefix": ["ruc", "usecallback", "cb"],
+    "body": ["const $1 = React.useCallback(()=> {", "  $2", "}, [$3]);"],
+    "description": "React useCallback hook"
+  },
+  "useMemo": {
+    "scope": "typescript,typescriptreact",
+    "prefix": ["rum", "usememo"],
+    "body": ["const $1 = React.useMemo(()=> {", "  $2", "}, [$3]);"],
+    "description": "React useMemo hook"
+  },
+  "useState": {
+    "scope": "typescript,typescriptreact",
+    "prefix": ["rus", "usestate"],
+    "body": [
+      "const [$1, set${1/(.*)/${1:/capitalize}/}] = React.useState<$2>();"
+    ],
+    "description": "React useState hook"
+  },
+  "useTranslation": {
+    "scope": "typescript,typescriptreact",
+    "prefix": ["t", "ut"],
+    "body": ["const { t } = useTranslation('$1');"],
+    "description": "useTranslation hook"
+  },
+  "Import React": {
+    "scope": "typescript,typescriptreact",
+    "prefix": ["react"],
+    "body": ["import * as React from 'react';"],
+    "description": "Import React"
+  },
+  "Function Component": {
+    "scope": "typescript,typescriptreact",
+    "prefix": "fc",
+    "body": [
+      "import * as React from 'react';",
+      "",
+      "export type $1Props = {",
+      "",
+      "}",
+      "",
+      "export const $1: React.FC<$1Props> = ({$3}) => {",
+      "  return (",
+      "    $2",
+      "  );",
+      "}"
+    ],
+    "description": "A new React Function Component"
+  }
+}
