@@ -424,16 +424,16 @@ interface TourLocationDocumentData {
      */
     tour_sort_order: prismicT.KeyTextField;
     /**
-     * tour blub field in *Tour Location*
+     * tour blurb field in *Tour Location*
      *
      * - **Field Type**: Rich Text
      * - **Placeholder**: *None*
-     * - **API ID Path**: tour_location.tour_blub
+     * - **API ID Path**: tour_location.tour_blurb
      * - **Tab**: Main
      * - **Documentation**: https://prismic.io/docs/core-concepts/rich-text-title
      *
      */
-    tour_blub: prismicT.RichTextField;
+    tour_blurb: prismicT.RichTextField;
     /**
      * Title field in *Tour Location*
      *
