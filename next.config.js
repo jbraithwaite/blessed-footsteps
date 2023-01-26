@@ -14,11 +14,6 @@ module.exports = {
   typescript: {
     ignoreBuildErrors: true,
   },
-  experimental: {
-    images: {
-      unoptimized: true,
-    },
-  },
   redirects: async () => {
     return [
       {

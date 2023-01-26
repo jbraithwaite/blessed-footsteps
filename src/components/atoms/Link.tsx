@@ -25,7 +25,7 @@ export const Link: React.FunctionComponent<
   }
 
   return (
-    <NextLink href={href}>
+    <NextLink href={href} legacyBehavior>
       {React.cloneElement(child, {
         className: cx(child.props.className),
       } as any)}

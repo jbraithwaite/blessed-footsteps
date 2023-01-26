@@ -424,6 +424,17 @@ interface TourLocationDocumentData {
      */
     tour_sort_order: prismicT.KeyTextField;
     /**
+     * tour blurb field in *Tour Location*
+     *
+     * - **Field Type**: Rich Text
+     * - **Placeholder**: *None*
+     * - **API ID Path**: tour_location.tour_blurb
+     * - **Tab**: Main
+     * - **Documentation**: https://prismic.io/docs/core-concepts/rich-text-title
+     *
+     */
+    tour_blurb: prismicT.RichTextField;
+    /**
      * Title field in *Tour Location*
      *
      * - **Field Type**: Title
@@ -482,5 +493,8 @@ export type AllDocumentTypes = ChapterDocument | CitationDocument | DaySummaryDo
 declare module "@prismicio/client" {
     interface CreateClient {
         (repositoryNameOrEndpoint: string, options?: prismic.ClientConfig): prismic.Client<AllDocumentTypes>;
+    }
+    namespace Content {
+        export type { ChapterDocumentData, ChapterDocumentDataBodyQuoteSlicePrimary, ChapterDocumentDataBodyQuoteSlice, ChapterDocumentDataBodyContentSlicePrimary, ChapterDocumentDataBodyContentSlice, ChapterDocumentDataBodyHeadingSlicePrimary, ChapterDocumentDataBodyHeadingSlice, ChapterDocumentDataBodyAudioClipSlicePrimary, ChapterDocumentDataBodyAudioClipSlice, ChapterDocumentDataBodySlice, ChapterDocument, CitationDocumentData, CitationDocument, DaySummaryDocumentData, DaySummaryDocument, ForewardDocumentData, ForewardDocument, IntroductionDocumentData, IntroductionDocument, PersonDocumentData, PersonDocument, PlaceDocumentData, PlaceDocument, PrefaceDocumentData, PrefaceDocument, TourLocationDocumentData, TourLocationDocument, AllDocumentTypes };
     }
 }

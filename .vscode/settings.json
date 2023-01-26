@@ -1,0 +1,8 @@
+{
+  "launch": {
+    "configurations": [],
+    "compounds": []
+  },
+  "editor.formatOnSave": true,
+  "files.autoSave": "onFocusChange"
+}

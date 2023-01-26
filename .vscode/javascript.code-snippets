@@ -1,0 +1,14 @@
+{
+  "The Ultimate Debugger": {
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "prefix": "cl",
+    "body": ["console.log({$1});"],
+    "description": "Console"
+  },
+  "Classnames": {
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "prefix": "cx",
+    "body": ["import cx from 'classnames';"],
+    "description": "classname helper"
+  }
+}
