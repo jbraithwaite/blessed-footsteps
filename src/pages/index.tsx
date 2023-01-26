@@ -37,7 +37,7 @@ const Home: NextPage = () => {
           encountered `Abdu’l-Bahá while visiting California. Additionally,
           photos and newspaper articles from the time will be included along
           with information about visiting sacred places blessed by
-          `Abdu’l-Bahá’s footsteps. The launch date is expected to be in 2022.
+          `Abdu’l-Bahá’s footsteps. The launch date is expected to be in 2023.
           You are welcome to sign up below for updated information about the
           website.
         </p>
